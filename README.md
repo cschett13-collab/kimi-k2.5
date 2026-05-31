@@ -30,6 +30,9 @@ Kimi K2.5 is an open-source, native multimodal agentic model built through conti
 - **Coding with Vision**: K2.5 generates code from visual specifications (UI designs, video workflows) and autonomously orchestrates tools for visual data processing.
 - **Agent Swarm**: K2.5 transitions from single-agent scaling to a self-directed, coordinated swarm-like execution scheme. It decomposes complex tasks into parallel sub-tasks executed by dynamically instantiated, domain-specific agents.
 
+> [!TIP]
+> **New to Kimi-K2.5?** Head to the **[Quick Start](QUICKSTART.md)** to go from a fresh clone to a working setup — hosted API or self-hosted — in a few commands, complete with a copy-paste smoke test and a GPU-verification sequence.
+
 ## 2. Model Summary
 
 <div align="center">
