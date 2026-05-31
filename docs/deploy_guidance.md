@@ -1,7 +1,7 @@
 # Kimi-K2.5 Deployment Guide
 
 > [!Note]
-> This guide only provides some examples of deployment commands for Kimi-K2.5, which may not be the optimal configuration. Since inference engines are still being updated frequenty,  please continue to follow the guidance from their homepage if you want to achieve better inference performance.
+> This guide only provides some examples of deployment commands for Kimi-K2.5, which may not be the optimal configuration. Since inference engines are still being updated frequently, please continue to follow the guidance from their homepage if you want to achieve better inference performance.
 
 > kimi_k2 reasoning parser and other related features have been merged into vLLM/sglang and will be available in the next release. For now, please use the nightly build Docker image.
 ## vLLM Deployment

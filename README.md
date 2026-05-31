@@ -67,7 +67,7 @@ Kimi K2.5 is an open-source, native multimodal agentic model built through conti
 <th align="center">Benchmark</th>
 <th align="center"><sup>Kimi K2.5<br><sup>(Thinking)</sup></sup></th>
 <th align="center"><sup>GPT-5.2 <br><sup>(xhigh)</sup></sup></th>
-<th align="center"><sup>Claude 4.5 Opus <br><sup>(Extended Thinking)</sup></sup></th>
+<th align="center"><sup>Claude Opus 4.5 <br><sup>(Extended Thinking)</sup></sup></th>
 <th align="center"><sup>Gemini 3 Pro <br><sup>(High Thinking Level)</sup></sup></th>
 <th align="center"><sup>DeepSeek V3.2 <br><sup>(Thinking)</sup></sup></th>
 <th align="center"><sup>Qwen3-VL-<br>235B-A22B-<br>Thinking</sup></th>
@@ -400,6 +400,7 @@ Kimi K2.5 is an open-source, native multimodal agentic model built through conti
 <td align="center" style="vertical-align: middle">65.3*</td>
 <td align="center" style="vertical-align: middle">64.3*</td>
 <td align="center" style="vertical-align: middle">-</td>
+</tr>
 <tr>
 <td align="center" colspan=8><strong>Agentic Search</strong></td>
 </tr>
@@ -699,6 +700,6 @@ Both the code repository and the model weights are released under the [Modified 
 
 ---
 
-## 9. Contact Us
+## 8. Contact Us
 
 If you have any questions, please reach out at [support@moonshot.cn](mailto:support@moonshot.cn).
