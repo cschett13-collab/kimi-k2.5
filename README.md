@@ -574,7 +574,7 @@ def simple_chat(client: openai.OpenAI, model_name: str):
     print('====== Below is response in Thinking Mode ======')
     print(f'response: {response.choices[0].message.content}')
 
-    # To use instant mode, pass {"thinking" = {"type":"disabled"}}
+    # To use instant mode, pass {"thinking": {"type": "disabled"}}
     response = client.chat.completions.create(
         model=model_name,
         messages=messages,
@@ -609,7 +609,7 @@ def chat_with_image(client: openai.OpenAI, model_name: str):
                 {'type': 'text', 'text': 'Describe this image in detail.'},
                 {
                     'type': 'image_url',
-                    'image_url': {'url': f'data:image/png;base64, {image_base64}'},
+                    'image_url': {'url': f'data:image/png;base64,{image_base64}'},
                 },
             ],
         }
@@ -623,7 +623,7 @@ def chat_with_image(client: openai.OpenAI, model_name: str):
     print('====== Below is response in Thinking Mode ======')
     print(f'response: {response.choices[0].message.content}')
 
-    # Also support instant mode if you pass {"thinking" = {"type":"disabled"}}
+    # Also support instant mode if you pass {"thinking": {"type": "disabled"}}
     response = client.chat.completions.create(
         model=model_name,
         messages=messages,
@@ -667,7 +667,7 @@ def chat_with_video(client: openai.OpenAI, model_name:str):
     print('====== Below is response in Thinking Mode ======')
     print(f'response: {response.choices[0].message.content}')
 
-    # Also support instant mode if pass {"thinking" = {"type":"disabled"}}
+    # Also support instant mode if pass {"thinking": {"type": "disabled"}}
     response = client.chat.completions.create(
         model=model_name,
         messages=messages,

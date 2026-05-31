@@ -32,7 +32,7 @@ pip install nvidia-cudnn-cu12==9.16.0.29
 
 Similarly, here is the example for it to run with TP8 on H200 in a single node via SGLang:
 ``` bash
-sglang serve --model-path $MODEL_PATH --tp 8 --trust-remote-code --tool-call-parser kimi_k2 --reasoning-parser kimi_k2
+python -m sglang.launch_server --model-path $MODEL_PATH --tp 8 --trust-remote-code --tool-call-parser kimi_k2 --reasoning-parser kimi_k2
 ```
 **Key parameter notes:**
 - `--tool-call-parser kimi_k2`: Required when enabling tool usage.
