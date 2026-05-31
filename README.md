@@ -18,7 +18,7 @@
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-Modified_MIT-f5de53?&color=f5de53"/></a>
 </div>
 <p align="center">
-<b>📰&nbsp;&nbsp;<a href="https://www.kimi.com/blog/kimi-k2-5.html">Tech Blog</a></b> | &nbsp;&nbsp;&nbsp; <b>📄&nbsp;&nbsp;<a href="tech_report.pdf">Full Report</a></b>
+<b>📰&nbsp;&nbsp;<a href="https://www.kimi.com/blog/kimi-k2-5.html">Tech Blog</a></b> | &nbsp;&nbsp;&nbsp; <b>📄&nbsp;&nbsp;<a href="tech_report.pdf">Full Report</a></b> | &nbsp;&nbsp;&nbsp; <b>🚀&nbsp;&nbsp;<a href="QUICKSTART.md">Quick Start</a></b>
 </p>
 
 ## 1. Model Introduction
@@ -547,6 +547,27 @@ For third-party APIs deployed with vLLM or SGLang, please note that:
 > - The recommended `top_p` is `0.95`.
 >
 > - To use instant mode, you need to pass `{'chat_template_kwargs': {"thinking": False}}` in `extra_body`.
+
+### Setting up the client
+
+All examples below take an `openai.OpenAI` client and a `model_name`. Construct them once and reuse them. The client reads your key from the `MOONSHOT_API_KEY` environment variable and targets the OpenAI-compatible endpoint (override `OPENAI_BASE_URL` if you self-host with vLLM/SGLang):
+
+```python
+import os
+import openai
+
+client = openai.OpenAI(
+    api_key=os.environ["MOONSHOT_API_KEY"],
+    base_url=os.environ.get("OPENAI_BASE_URL", "https://api.moonshot.ai/v1"),
+)
+model_name = os.environ.get("MODEL_NAME", "kimi-k2.5")
+
+if __name__ == "__main__":
+    simple_chat(client, model_name)
+```
+
+> [!Note]
+> When you point `OPENAI_BASE_URL` at a self-hosted vLLM/SGLang server, set `MODEL_NAME` to the value you launched the server with (e.g. the model path), and use `extra_body={'chat_template_kwargs': {"thinking": False}}` for instant mode instead of the official-API form shown below.
 
 ### Chat Completion
 
