@@ -18,7 +18,7 @@
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-Modified_MIT-f5de53?&color=f5de53"/></a>
 </div>
 <p align="center">
-<b>📰&nbsp;&nbsp;<a href="https://www.kimi.com/blog/kimi-k2-5.html">Tech Blog</a></b> | &nbsp;&nbsp;&nbsp; <b>📄&nbsp;&nbsp;<a href="tech_report.pdf">Full Report</a></b>
+<b>📰&nbsp;&nbsp;<a href="https://www.kimi.com/blog/kimi-k2-5.html">Tech Blog</a></b> | &nbsp;&nbsp;&nbsp; <b>📄&nbsp;&nbsp;<a href="tech_report.pdf">Full Report</a></b> | &nbsp;&nbsp;&nbsp; <b>🚀&nbsp;&nbsp;<a href="QUICKSTART.md">Quick Start</a></b>
 </p>
 
 ## 1. Model Introduction
@@ -29,6 +29,9 @@ Kimi K2.5 is an open-source, native multimodal agentic model built through conti
 - **Native Multimodality**: Pre-trained on vision–language tokens, K2.5 excels in visual knowledge, cross-modal reasoning, and agentic tool use grounded in visual inputs.
 - **Coding with Vision**: K2.5 generates code from visual specifications (UI designs, video workflows) and autonomously orchestrates tools for visual data processing.
 - **Agent Swarm**: K2.5 transitions from single-agent scaling to a self-directed, coordinated swarm-like execution scheme. It decomposes complex tasks into parallel sub-tasks executed by dynamically instantiated, domain-specific agents.
+
+> [!TIP]
+> **New to Kimi-K2.5?** Head to the **[Quick Start](QUICKSTART.md)** to go from a fresh clone to a working setup — hosted API or self-hosted — in a few commands, complete with a copy-paste smoke test and a GPU-verification sequence.
 
 ## 2. Model Summary
 
@@ -67,7 +70,7 @@ Kimi K2.5 is an open-source, native multimodal agentic model built through conti
 <th align="center">Benchmark</th>
 <th align="center"><sup>Kimi K2.5<br><sup>(Thinking)</sup></sup></th>
 <th align="center"><sup>GPT-5.2 <br><sup>(xhigh)</sup></sup></th>
-<th align="center"><sup>Claude 4.5 Opus <br><sup>(Extended Thinking)</sup></sup></th>
+<th align="center"><sup>Claude Opus 4.5 <br><sup>(Extended Thinking)</sup></sup></th>
 <th align="center"><sup>Gemini 3 Pro <br><sup>(High Thinking Level)</sup></sup></th>
 <th align="center"><sup>DeepSeek V3.2 <br><sup>(Thinking)</sup></sup></th>
 <th align="center"><sup>Qwen3-VL-<br>235B-A22B-<br>Thinking</sup></th>
@@ -400,6 +403,7 @@ Kimi K2.5 is an open-source, native multimodal agentic model built through conti
 <td align="center" style="vertical-align: middle">65.3*</td>
 <td align="center" style="vertical-align: middle">64.3*</td>
 <td align="center" style="vertical-align: middle">-</td>
+</tr>
 <tr>
 <td align="center" colspan=8><strong>Agentic Search</strong></td>
 </tr>
@@ -547,6 +551,27 @@ For third-party APIs deployed with vLLM or SGLang, please note that:
 >
 > - To use instant mode, you need to pass `{'chat_template_kwargs': {"thinking": False}}` in `extra_body`.
 
+### Setting up the client
+
+All examples below take an `openai.OpenAI` client and a `model_name`. Construct them once and reuse them. The client reads your key from the `MOONSHOT_API_KEY` environment variable and targets the OpenAI-compatible endpoint (override `OPENAI_BASE_URL` if you self-host with vLLM/SGLang):
+
+```python
+import os
+import openai
+
+client = openai.OpenAI(
+    api_key=os.environ["MOONSHOT_API_KEY"],
+    base_url=os.environ.get("OPENAI_BASE_URL", "https://api.moonshot.ai/v1"),
+)
+model_name = os.environ.get("MODEL_NAME", "kimi-k2.5")
+
+if __name__ == "__main__":
+    simple_chat(client, model_name)
+```
+
+> [!Note]
+> When you point `OPENAI_BASE_URL` at a self-hosted vLLM/SGLang server, set `MODEL_NAME` to the value you launched the server with (e.g. the model path), and use `extra_body={'chat_template_kwargs': {"thinking": False}}` for instant mode instead of the official-API form shown below.
+
 ### Chat Completion
 
 This is a simple chat completion script which shows how to call K2.5 API in Thinking and Instant modes.
@@ -573,7 +598,7 @@ def simple_chat(client: openai.OpenAI, model_name: str):
     print('====== Below is response in Thinking Mode ======')
     print(f'response: {response.choices[0].message.content}')
 
-    # To use instant mode, pass {"thinking" = {"type":"disabled"}}
+    # To use instant mode, pass {"thinking": {"type": "disabled"}}
     response = client.chat.completions.create(
         model=model_name,
         messages=messages,
@@ -608,7 +633,7 @@ def chat_with_image(client: openai.OpenAI, model_name: str):
                 {'type': 'text', 'text': 'Describe this image in detail.'},
                 {
                     'type': 'image_url',
-                    'image_url': {'url': f'data:image/png;base64, {image_base64}'},
+                    'image_url': {'url': f'data:image/png;base64,{image_base64}'},
                 },
             ],
         }
@@ -622,7 +647,7 @@ def chat_with_image(client: openai.OpenAI, model_name: str):
     print('====== Below is response in Thinking Mode ======')
     print(f'response: {response.choices[0].message.content}')
 
-    # Also support instant mode if you pass {"thinking" = {"type":"disabled"}}
+    # Also support instant mode if you pass {"thinking": {"type": "disabled"}}
     response = client.chat.completions.create(
         model=model_name,
         messages=messages,
@@ -666,7 +691,7 @@ def chat_with_video(client: openai.OpenAI, model_name:str):
     print('====== Below is response in Thinking Mode ======')
     print(f'response: {response.choices[0].message.content}')
 
-    # Also support instant mode if pass {"thinking" = {"type":"disabled"}}
+    # Also support instant mode if pass {"thinking": {"type": "disabled"}}
     response = client.chat.completions.create(
         model=model_name,
         messages=messages,
@@ -699,6 +724,6 @@ Both the code repository and the model weights are released under the [Modified 
 
 ---
 
-## 9. Contact Us
+## 8. Contact Us
 
 If you have any questions, please reach out at [support@moonshot.cn](mailto:support@moonshot.cn).
